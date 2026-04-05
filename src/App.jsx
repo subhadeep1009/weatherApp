@@ -4,7 +4,7 @@ import { WiHumidity } from "react-icons/wi";
 import { PiWindFill } from "react-icons/pi";
 import axios from "axios";
 
-const API_KEY = "f31beeea38aa5b330438172fb28d6b2f";
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 const App = () => {
   const [search, setSearch] = useState("");
@@ -24,8 +24,7 @@ const App = () => {
       const { data } = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=${API_KEY}`,
       );
-      console.log(data);
-      if (data.cod == 200) {
+      if (data.cod === 200 || data.cod === "200") {
         setLoading(false)
         setTemperature(data.main.temp);
         setHumidity(data.main.humidity);
